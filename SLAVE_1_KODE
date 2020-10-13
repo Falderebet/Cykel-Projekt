@@ -1,0 +1,43 @@
+#include <SPI.h>
+#include <nRF24L01.h> // https://github.com/tmrh20/RF24
+#include <RF24.h>
+
+const int pinCE = 7;
+const int pinCSN = 8;
+byte counter = 1;
+bool done = false;
+RF24 wirelessSPI(pinCE, pinCSN);
+const uint64_t wAddress = {0xB00B1E50D2LL};
+const uint64_t rAddress = {0xB00B1E50B1LL};
+int list[10];
+int gotList[10];
+
+void setup() {
+    Serial.begin(9600);
+    wirelessSPI.begin();
+    wirelessSPI.openWritingPipe(wAddress);
+    wirelessSPI.openReadingPipe(1, rAddress);
+    wirelessSPI.stopListening();
+  }
+
+void loop() {
+
+    if(!wirelessSPI.write(&list, sizeof(list))) {
+        Serial.println("Fik ikke sendt pakke");
+      }
+    else {
+        Serial.println("Fik sendt pakke");
+      }
+
+    wirelessSPI.startListening();
+    unsigned long startTimer = millis();
+    bool timeout = false;
+    while(!wirelessSPI.available() && !timeout) {
+        if(millis() - startTimer > 500) timeout = true;
+      }
+    if(timeout) Serial.println("Timeout");
+    else {
+        wirelessSPI.read(&gotList, sizeof(gotList));
+      }
+    wirelessSPI.stopListening();
+  }
