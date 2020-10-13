@@ -1,0 +1,78 @@
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+
+const int pinCE = 7;
+const int pinCSN = 8;
+int liste[10];
+RF24 wirelessSPI(pinCE, pinCSN);
+const uint64_t rAddress[] = {0xB00B1E50D2LL, 0xB00B1E50C3LL};
+const uint64_t wAddress[] = {0xB00B1E50B1LL, 0xB00B1E50A4LL};
+
+void setup() {
+    Serial.begin(9600);
+    wirelessSPI.begin();
+    wirelessSPI.openReadingPipe(1, rAddress[0]);
+    wirelessSPI.openReadingPipe(2, rAddress[1]);
+    wirelessSPI.startListening();
+  }
+
+void loop() {
+    byte pipeNum = 0;
+    int gotList1[10];
+    int gotList2[10];
+
+    while(wirelessSPI.available(&pipeNum)) {
+        if(pipeNum == 1) {
+          wirelessSPI.read(&gotList1, sizeof(gotList1));
+          Serial.println("Modtaget liste fra slave: ");
+          Serial.println(pipeNum);
+          Serial.println("Slaven har sendt listen: ");
+          printList(gotList1);
+
+          if(sendCorrectNumber(pipeNum)) Serial.println("Vi fik sendt vores liste");
+          else Serial.println("Write failed");
+        }
+          
+        
+
+        
+        if(pipeNum == 2) {
+            wirelessSPI.read(&gotList2, sizeof(gotList2));
+            Serial.println("Modtaget liste fra slave: ");
+            Serial.println(pipeNum);
+            Serial.println("Slaven har sendt listen: ");
+            printList(gotList2);
+
+            if(sendCorrectNumber(pipeNum)) Serial.println("Vi fik sendt vores liste");
+            else Serial.println("Write failed");
+          }
+      }
+  }
+
+
+bool sendCorrectNumber(byte xMitter) {
+    bool worked;
+    wirelessSPI.stopListening();
+    wirelessSPI.openWritingPipe(wAddress[xMitter-1]);
+    if(xMitter == 1) {
+      if(!wirelessSPI.write(&gotListe1, sizeof(gotListe1))) worked = false;
+      else worked = true;    
+    }
+    
+    if(xMitter == 2) {
+        if(!wirelessSPI.write(&gotListe2, sizeof(gotListe2))) worked = false;
+        else worked = true;
+      }
+
+    wirelessSPI.startListening();
+    return worked;
+  }
+
+
+
+void printList(int list[]) {
+    for(int i = 0; 10 > i; i++) {
+        Serial.println(list[i]);
+      }
+  }
