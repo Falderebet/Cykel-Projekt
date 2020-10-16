@@ -1,12 +1,14 @@
-int vibPin1 = 2;
-int vibPin2 = A2;
+int vibPin1 = 3;
+int vibPin2 = 5;
 int vibPin3;
 
-int button1 = A3;
-int button2 = A4;
-int button3 = A5;
+int button1 = 2;
+int button2 = 4;
+int button3 = 7;
 
-long timei;
+long timei = 0;
+
+
 
 #define NUM_USER_BUTTONS 4
 int userButtonReadPins[NUM_USER_BUTTONS];
@@ -27,8 +29,22 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println(activate());
-  delay(5000);
+
+    while (digitalRead(button1) + digitalRead(button2) < 2)
+    {
+    }
+  countdown();
+  delay (random(1000, 6000));
+  timei += activate();
+
+  delay (random(1000, 6000));
+  timei += activate();
+
+  delay (random(1000, 6000));
+  timei += activate();
+  Serial.println(timei);
+
+  
 }
 
 long activate()
@@ -49,7 +65,7 @@ long activate()
       break;
   }
   int timeEnd = millis();
-  return timeStart - timeEnd;
+  return  timeEnd - timeStart;
 
 }
 
@@ -60,7 +76,22 @@ void vibrate(int vib, int button)
   //Vent til knappen bliver trykket
   while (digitalRead(button) == LOW)
   {
-    Serial.println("test");
+    Serial.println(millis());
   }
   digitalWrite(vib, LOW);
+}
+
+void countdown()
+{
+  digitalWrite(vibPin1, HIGH);
+  delay(500);
+  digitalWrite(vibPin1, LOW);
+  delay(500);
+  digitalWrite(vibPin1, HIGH);
+  delay(500);
+  digitalWrite(vibPin1, LOW);
+  delay(500);
+  digitalWrite(vibPin1, HIGH);
+  delay(500);
+  digitalWrite(vibPin1, LOW);
 }
