@@ -69,8 +69,9 @@ void loop() {
           Serial.print("Success sending guess: ");
           Serial.println(number);
           long slave = mainGame();
-          map(slave, 0, 10000, 0, 255);
+          map(slave, 0, 255, 0, 10000);
           (byte)slave;
+          Serial.println("Printing Slave");
           Serial.println(slave);
           delay(3000);
           radio.openWritingPipe(PTXpipe);        //open writing or transmit pipe

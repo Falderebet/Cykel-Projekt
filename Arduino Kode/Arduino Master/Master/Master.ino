@@ -76,7 +76,7 @@ void loop() {
      else if(gotByte == 1) {
         Serial.println("Starting game");
         long sekunder = mainGame();
-        map(sekunder, 0, 10000, 0, 255);
+        map(sekunder, 0, 255, 0, 10000);
         (byte)sekunder;
         delay(2000);
         byte gotResult = 0;
