@@ -32,8 +32,7 @@ long mainGame() {
 long activate()
 {
   int timeStart = millis();
-  int randNumber = random(1, 4);
-
+  int randNumber = random(1, 3);
   switch (randNumber)
   {
     case 1:

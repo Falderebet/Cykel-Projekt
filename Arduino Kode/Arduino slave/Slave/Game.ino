@@ -1,13 +1,13 @@
 long mainGame() {
   // put your main code here, to run repeatedly:
   countdown();
-  delay (random(1000, 6000));
+  delay (random(1000, 3000));
   timei += activate();
 
-  delay (random(1000, 6000));
+  delay (random(1000, 3000));
   timei += activate();
 
-  delay (random(1000, 6000));
+  delay (random(1000, 3000));
   timei += activate();
   Serial.println(timei);
   return timei;
@@ -17,8 +17,7 @@ long mainGame() {
 long activate()
 {
   int timeStart = millis();
-  int randNumber = random(1, 4);
-
+  int randNumber = random(1, 3);
   switch (randNumber)
   {
     case 1:
@@ -29,6 +28,7 @@ long activate()
       break;
 
   }
+
   int timeEnd = millis();
   return  timeEnd - timeStart;
 
