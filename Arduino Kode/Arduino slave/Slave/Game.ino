@@ -1,9 +1,5 @@
 long mainGame() {
   // put your main code here, to run repeatedly:
-
-    while (digitalRead(button1) + digitalRead(button2) < 2)
-    {
-    }
   countdown();
   delay (random(1000, 6000));
   timei += activate();

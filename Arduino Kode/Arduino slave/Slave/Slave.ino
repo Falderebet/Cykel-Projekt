@@ -26,7 +26,7 @@ void setup() {
   radio.begin();            //Start the nRF24 module
   radio.setPALevel(RF24_PA_HiGH);  // "short range setting" - increase if you want more range AND have a good power supply
   radio.setChannel(108);          // the higher channels tend to be more "open"
-  radio.openReadingPipe(0,PTXpipe);  //open reading or receive pipe
+  radio.openReadingPipe(0, PTXpipe);  //open reading or receive pipe
   radio.stopListening(); //go into transmit mode
 
   //Game setup.
@@ -46,13 +46,14 @@ void loop() {
    if(!done) { //true once you guess the right number
      byte number = 1; //generate random guess between 0 and 10
      radio.openWritingPipe(PTXpipe);        //open writing or transmit pipe
-     if (!radio.write( &number, 1 )){  //if the write fails let the user know over serial monitor
+     if (!radio.write(&number, 1)){  //if the write fails let the user know over serial monitor
          Serial.println("Guess delivery failed");      
      }
 
      else { //if the write was successful 
           Serial.print("Success sending guess: ");
           Serial.println(number);
+          result slave = mainGame();
        
         radio.startListening(); //switch to receive mode to see if the guess was right
         unsigned long startTimer = millis(); //start timer, we will wait 200ms 

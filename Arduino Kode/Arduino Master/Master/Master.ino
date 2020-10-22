@@ -72,15 +72,15 @@ void loop() {
      Serial.print("They sent number: ");
      Serial.println(gotByte); //print payload or the number the transmitter guessed
      // Her er if statements hvor kode kan kørers.
-     if(gotByte != nummeret) { //if true they guessed wrong
+     if(gotByte == 0) { //if true they guessed wrong
       Serial.println("Fail!! Try again."); 
      }
-     else if( gotByte == 0) {
-        Serial.println("You Won!");
+     else if(gotByte == 1) {
+        Serial.println("Starting game");
         long sekunder = mainGame();
         (byte)sekunder;
         if(sendCorrectNumber(pipeNum, sekunder)) {
-            Serial.println("You sent sekunder to master");
+            Serial.println("You sent " + sekunder + " to master");
           }
       }
      else if(gotByte == 1) {
