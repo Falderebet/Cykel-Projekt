@@ -8,7 +8,7 @@
 //This sketch is free to the public to use and modify at your own risk
 
 int vibPin1 = 3;
-int vibPin2 = 5;
+int vibPin2 = 6;
 
 
 //Game kode
@@ -69,6 +69,7 @@ void loop() {
           Serial.print("Success sending guess: ");
           Serial.println(number);
           long slave = mainGame();
+          map(slave, 0, 10000, 0, 255);
           (byte)slave;
           delay(3000);
           radio.openWritingPipe(PTXpipe);        //open writing or transmit pipe
