@@ -48,8 +48,10 @@ void setup() {
   Serial.begin(9600);
   pinMode(vibPin1, OUTPUT);
   pinMode(vibPin2, OUTPUT);
+  pinMode(vibPin3, OUTPUT);
   pinMode(button1, INPUT);
   pinMode(button2, INPUT);
+  pinMode(button3, INPUT);
 }
 
 void loop() {
@@ -67,13 +69,18 @@ void loop() {
           Serial.print("Success sending guess: ");
           Serial.println(number);
           long slave = mainGame();
-       
-        radio.startListening(); //switch to receive mode to see if the guess was right
-        unsigned long startTimer = millis(); //start timer, we will wait 200ms 
-        bool timeout = false; 
-        while ( !radio.available() && !timeout ) { //run while no receive data and not timed out
-          if (millis() - startTimer > 10000 ) timeout = true; //timed out
-        }
+          (byte)slave;
+          delay(3000);
+          radio.openWritingPipe(PTXpipe);        //open writing or transmit pipe
+          if (!radio.write(&slave, 1)) {  //if the write fails let the user know over serial monitor
+              Serial.println("Guess delivery failed");
+          }
+          radio.startListening(); //switch to receive mode to see if the guess was right
+          unsigned long startTimer = millis(); //start timer, we will wait 200ms 
+          bool timeout = false; 
+          while ( !radio.available() && !timeout ) { //run while no receive data and not timed out
+           if (millis() - startTimer > 10000 ) timeout = true; //timed out
+          }
 
     
 
