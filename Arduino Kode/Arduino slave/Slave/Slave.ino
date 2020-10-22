@@ -66,6 +66,7 @@ void loop() {
      }
 
      else { //if the write was successful 
+          timei = 0;
           Serial.print("Success sending guess: ");
           Serial.println(number);
           long slave = mainGame();
