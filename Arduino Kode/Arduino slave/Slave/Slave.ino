@@ -69,7 +69,7 @@ void loop() {
           Serial.print("Success sending guess: ");
           Serial.println(number);
           long slave = mainGame();
-          byte slaveR = map(slave, 0, 255, 0, 10000);
+          byte slaveR = map(slave, 0, 10000, 0, 255);
           Serial.println("Printing Slave");
           Serial.println(slaveR);
           delay(3000);

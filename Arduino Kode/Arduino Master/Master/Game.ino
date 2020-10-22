@@ -16,13 +16,13 @@ int userButtonReadPins[NUM_USER_BUTTONS];
 long mainGame() {
   // put your main code here, to run repeatedly:
   countdown();
-  delay (random(1000, 3000));
+  delay (random(1000, 6000));
   timei += activate();
 
-  delay (random(1000, 3000));
+  delay (random(1000, 6000));
   timei += activate();
 
-  delay (random(1000, 3000));
+  delay (random(1000, 6000));
   timei += activate();
   Serial.println(timei);
   return timei;
