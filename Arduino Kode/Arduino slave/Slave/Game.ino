@@ -27,9 +27,7 @@ long activate()
     case 2:
       vibrate(vibPin2, button2);
       break;
-    case 3:
-      vibrate(vibPin3, button3);
-      break;
+
   }
   int timeEnd = millis();
   return  timeEnd - timeStart;

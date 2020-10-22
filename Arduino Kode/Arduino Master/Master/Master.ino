@@ -98,11 +98,12 @@ void loop() {
      else if(gotByte == 2) {
         Serial.println("Somethins else happens");
       }
-      
+      /*
      else { //if this is true they guessed right
       if(sendCorrectNumber(pipeNum)) Serial.println("Correct! Du vandt."); //if true we successfully responded
       else Serial.println("Write failed"); //if true we failed responding
      }
+     */
      Serial.println();
     }
 

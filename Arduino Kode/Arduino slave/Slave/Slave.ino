@@ -80,7 +80,7 @@ void loop() {
           radio.startListening(); //switch to receive mode to see if the guess was right
           unsigned long startTimer = millis(); //start timer, we will wait 200ms 
           bool timeout = false; 
-          while ( !radio.available() && !timeout ) { //run while no receive data and not timed out
+          while (!radio.available() && !timeout ) { //run while no receive data and not timed out
            if (millis() - startTimer > 10000 ) timeout = true; //timed out
           }
 
@@ -88,7 +88,7 @@ void loop() {
 
         if (timeout) Serial.println("Last guess was wrong, try again"); //no data to receive guess must have been wrong
         else  { //we received something so guess must have been right
-          byte daNumber; //variable to store received value
+          byte daNumber = 1; //variable to store received value
           radio.read( &daNumber,1); //read value
           if(daNumber == 0) { //make sure it equals value we just sent, if so we are done
             Serial.println("You guessed right so you are done");
