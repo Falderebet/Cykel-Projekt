@@ -1,13 +1,13 @@
 long mainGame() {
   // put your main code here, to run repeatedly:
   countdown();
-  delay (random(1000, 6000));
+  delay (random(1000, 3000));
   timei += activate();
 
-  delay (random(1000, 6000));
+  delay (random(1000, 3000));
   timei += activate();
 
-  delay (random(1000, 6000));
+  delay (random(1000, 3000));
   timei += activate();
   Serial.println(timei);
   return timei;
@@ -19,15 +19,18 @@ long activate()
   int timeStart = millis();
   int randNumber = random(1, 4);
 
-if(randNumber <= 2)
-{
+  switch (randNumber)
+  {
+    case 1:
       vibrate(vibPin1, button1);
-}
-else
-{
+      break;
+    case 2:
       vibrate(vibPin2, button2);
-}
-
+      break;
+    case 3:
+      vibrate(vibPin3, button3);
+      break;
+  }
   int timeEnd = millis();
   return  timeEnd - timeStart;
 
