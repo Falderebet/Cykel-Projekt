@@ -79,9 +79,12 @@ void loop() {
         (byte)sekunder;
         delay(2000);
         byte gotResult = 255;
-        radio.read(&gotResult, 1);
-        Serial.println("You recieved from slave");
-        Serial.println(gotResult);
+        while(radio.available(&pipeNum)){ //Check if received data
+          byte gotResult = 0;
+          radio.read( &gotResult, 1 );
+          Serial.println("You recived gotResult from slave");
+          Serial.println(gotResult);
+        }
           }
       
      else if(gotByte == 1) {
