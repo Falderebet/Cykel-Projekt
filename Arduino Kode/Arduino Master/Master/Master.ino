@@ -15,12 +15,10 @@ RF24 radio(pinCE, pinCSN); // Declare object from nRF24 library (Create your wir
 
 int vibPin1 = 3;
 int vibPin2 = 5;
-int vibPin3;
 
 //Game kode
 int button1 = 2;
 int button2 = 4;
-int button3 = 7;
 
 long timei = 0;
 
@@ -55,10 +53,8 @@ void setup() {
   randomSeed(analogRead(0));
   pinMode(vibPin1, OUTPUT);
   pinMode(vibPin2, OUTPUT);
-  pinMode(vibPin3, OUTPUT);
   pinMode(button1, INPUT);
   pinMode(button2, INPUT);
-  pinMode(button3, INPUT);
 }
 
 void loop() {   

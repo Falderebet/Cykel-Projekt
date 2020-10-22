@@ -19,18 +19,15 @@ long activate()
   int timeStart = millis();
   int randNumber = random(1, 4);
 
-  switch (randNumber)
-  {
-    case 1:
+if(randNumber <= 2)
+{
       vibrate(vibPin1, button1);
-      break;
-    case 2:
+}
+else
+{
       vibrate(vibPin2, button2);
-      break;
-    case 3:
-      vibrate(vibPin3, button3);
-      break;
-  }
+}
+
   int timeEnd = millis();
   return  timeEnd - timeStart;
 

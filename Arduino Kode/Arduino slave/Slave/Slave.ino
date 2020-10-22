@@ -48,10 +48,8 @@ void setup() {
   Serial.begin(9600);
   pinMode(vibPin1, OUTPUT);
   pinMode(vibPin2, OUTPUT);
-  pinMode(vibPin3, OUTPUT);
   pinMode(button1, INPUT);
   pinMode(button2, INPUT);
-  pinMode(button3, INPUT);
 }
 
 void loop() {
