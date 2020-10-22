@@ -69,13 +69,12 @@ void loop() {
           Serial.print("Success sending guess: ");
           Serial.println(number);
           long slave = mainGame();
-          map(slave, 0, 255, 0, 10000);
-          (byte)slave;
+          byte slaveR = map(slave, 0, 255, 0, 10000);
           Serial.println("Printing Slave");
-          Serial.println(slave);
+          Serial.println(slaveR);
           delay(3000);
           radio.openWritingPipe(PTXpipe);        //open writing or transmit pipe
-          if (!radio.write(&slave, 1)) {  //if the write fails let the user know over serial monitor
+          if (!radio.write(&slaveR, 1)) {  //if the write fails let the user know over serial monitor
               Serial.println("Guess delivery failed");
           }
           radio.startListening(); //switch to receive mode to see if the guess was right
