@@ -79,7 +79,9 @@ void loop() {
         map(sekunder, 0, 10000, 0, 255);
         (byte)sekunder;
         delay(2000);
-        byte gotResult = 255;
+        byte gotResult = 0;
+        Serial.println("Printing sekunder: ");
+        Serial.println(sekunder);
         while(radio.available(&pipeNum)){ //Check if received data
           byte gotResult = 0;
           radio.read( &gotResult, 1 );

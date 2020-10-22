@@ -71,6 +71,7 @@ void loop() {
           long slave = mainGame();
           map(slave, 0, 10000, 0, 255);
           (byte)slave;
+          Serial.println(slave);
           delay(3000);
           radio.openWritingPipe(PTXpipe);        //open writing or transmit pipe
           if (!radio.write(&slave, 1)) {  //if the write fails let the user know over serial monitor
