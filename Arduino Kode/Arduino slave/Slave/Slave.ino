@@ -7,6 +7,21 @@
 
 //This sketch is free to the public to use and modify at your own risk
 
+int vibPin1 = 3;
+int vibPin2 = 5;
+int vibPin3;
+
+//Game kode
+int button1 = 2;
+int button2 = 4;
+int button3 = 7;
+
+long timei = 0;
+
+#define NUM_USER_BUTTONS 4
+int userButtonReadPins[NUM_USER_BUTTONS];
+
+
 
 #include <SPI.h> //Call SPI library so you can communicate with the nRF24L01+
 #include <nRF24L01.h> //nRF2401 libarary found at https://github.com/tmrh20/RF24/
@@ -24,7 +39,7 @@ bool done = false; //used to know when to stop sending packets
 void setup() {
   Serial.begin(9600);   //start serial to communicate process
   radio.begin();            //Start the nRF24 module
-  radio.setPALevel(RF24_PA_HiGH);  // "short range setting" - increase if you want more range AND have a good power supply
+  radio.setPALevel(RF24_PA_HIGH);  // "short range setting" - increase if you want more range AND have a good power supply
   radio.setChannel(108);          // the higher channels tend to be more "open"
   radio.openReadingPipe(0, PTXpipe);  //open reading or receive pipe
   radio.stopListening(); //go into transmit mode
@@ -53,13 +68,13 @@ void loop() {
      else { //if the write was successful 
           Serial.print("Success sending guess: ");
           Serial.println(number);
-          result slave = mainGame();
+          long slave = mainGame();
        
         radio.startListening(); //switch to receive mode to see if the guess was right
         unsigned long startTimer = millis(); //start timer, we will wait 200ms 
         bool timeout = false; 
         while ( !radio.available() && !timeout ) { //run while no receive data and not timed out
-          if (millis() - startTimer > 200 ) timeout = true; //timed out
+          if (millis() - startTimer > 10000 ) timeout = true; //timed out
         }
 
     
@@ -68,7 +83,7 @@ void loop() {
         else  { //we received something so guess must have been right
           byte daNumber; //variable to store received value
           radio.read( &daNumber,1); //read value
-          if(daNumber == randNumber) { //make sure it equals value we just sent, if so we are done
+          if(daNumber == 0) { //make sure it equals value we just sent, if so we are done
             Serial.println("You guessed right so you are done");
             done = true; //signal to loop that we are done guessing
           }

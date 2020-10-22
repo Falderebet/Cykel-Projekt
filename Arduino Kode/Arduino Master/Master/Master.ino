@@ -75,14 +75,18 @@ void loop() {
      if(gotByte == 0) { //if true they guessed wrong
       Serial.println("Fail!! Try again."); 
      }
+     
      else if(gotByte == 1) {
         Serial.println("Starting game");
         long sekunder = mainGame();
         (byte)sekunder;
-        if(sendCorrectNumber(pipeNum, sekunder)) {
-            Serial.println("You sent " + sekunder + " to master");
+        delay(2000);
+        byte gotResult = 255;
+        radio.read(&gotResult, 1);
+        Serial.println("You recieved from slave");
+        Serial.println(gotResult);
           }
-      }
+      
      else if(gotByte == 1) {
         Serial.println("Someone fell");
       }

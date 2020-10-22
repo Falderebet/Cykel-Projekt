@@ -48,8 +48,7 @@ void vibrate(int vib, int button)
   digitalWrite(vib, LOW);
 }
 
-void countdown()
-{
+void countdown() {
   digitalWrite(vibPin1, HIGH);
   delay(500);
   digitalWrite(vibPin1, LOW);
