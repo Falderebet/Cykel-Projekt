@@ -76,6 +76,7 @@ void loop() {
      else if(gotByte == 1) {
         Serial.println("Starting game");
         long sekunder = mainGame();
+        map(sekunder, 0, 10000, 0, 255);
         (byte)sekunder;
         delay(2000);
         byte gotResult = 255;
@@ -84,6 +85,8 @@ void loop() {
           radio.read( &gotResult, 1 );
           Serial.println("You recived gotResult from slave");
           Serial.println(gotResult);
+          Serial.println("Daniels result was: ");
+          Serial.print(sekunder);
         }
           }
       
