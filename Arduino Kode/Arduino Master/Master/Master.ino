@@ -19,6 +19,7 @@ int vibPin2 = 5;
 //Game kode
 int button1 = 2;
 int button2 = 4;
+int button3 = 7;
 
 long timei = 0;
 

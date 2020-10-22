@@ -34,15 +34,14 @@ long activate()
   int timeStart = millis();
   int randNumber = random(1, 4);
 
-if(randNumber <= 2)
-{
+  switch (randNumber)
+  {
+    case 1:
       vibrate(vibPin1, button1);
-}
-else
-{
+      break;
+    case 2:
       vibrate(vibPin2, button2);
-}
-
+      break;
   }
   int timeEnd = millis();
   return  timeEnd - timeStart;
@@ -61,8 +60,7 @@ void vibrate(int vib, int button)
   digitalWrite(vib, LOW);
 }
 
-void countdown()
-{
+void countdown() {
   digitalWrite(vibPin1, HIGH);
   delay(500);
   digitalWrite(vibPin1, LOW);
