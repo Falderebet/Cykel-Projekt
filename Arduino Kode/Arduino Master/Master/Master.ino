@@ -78,9 +78,8 @@ void loop() {
         long sekunder = mainGame();
         byte sekunderR = map(sekunder, 0, 255, 0, 10000);
         (byte)sekunder;
-        delay(2000);
         byte gotResult = 0;
-        Serial.println("Printing sekunder: ");
+        Serial.println("Printing sekunder: DET GØR DEN");
         Serial.println(sekunderR);
         while(radio.available(&pipeNum)){ //Check if received data
           byte gotResult = 0;
@@ -101,7 +100,7 @@ void loop() {
       }
       
      else { //if this is true they guessed right
-      if(sendCorrectNumber(pipeNum)) Serial.println("Correct! You're done."); //if true we successfully responded
+      if(sendCorrectNumber(pipeNum)) Serial.println("Correct! Du vandt."); //if true we successfully responded
       else Serial.println("Write failed"); //if true we failed responding
      }
      Serial.println();
