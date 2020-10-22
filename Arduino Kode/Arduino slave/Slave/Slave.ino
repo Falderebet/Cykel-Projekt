@@ -9,12 +9,12 @@
 
 int vibPin1 = 3;
 int vibPin2 = 5;
-int vibPin3;
+
 
 //Game kode
 int button1 = 2;
 int button2 = 4;
-int button3 = 7;
+
 
 long timei = 0;
 
@@ -48,10 +48,10 @@ void setup() {
   Serial.begin(9600);
   pinMode(vibPin1, OUTPUT);
   pinMode(vibPin2, OUTPUT);
-  pinMode(vibPin3, OUTPUT);
+  
   pinMode(button1, INPUT);
   pinMode(button2, INPUT);
-  pinMode(button3, INPUT);
+  
 }
 
 void loop() {
